@@ -1,7 +1,7 @@
 // (function() {
     'use strict';
 
-    var origin = 'http://113bcea9.ngrok.io'
+    var origin = 'http://3.92.196.92'
     var baseUrl = origin + '/api'
     var addedObservers = false
     

@@ -8,7 +8,7 @@ class User{
 			selectedProduct: null,
 			quantity: 1
 		}
-		this.UserDetails = {}
+		this.UserDetails = null
 		this.all_requests = []
 	}
 	getUserDetails(){
