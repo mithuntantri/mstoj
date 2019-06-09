@@ -8,7 +8,6 @@ var session = require('client-sessions');
 var passport = require('passport');
 var dbConn = require('./database/databaseConnection');
 var jwt = require('jwt-simple');
-var redis = require('redis');
 var moment = require('moment');
 var exec = require('child_process').exec;
 
@@ -35,13 +34,6 @@ var allowCrossDomain = function(req, res, next) {
     next();
 };
 app.use(allowCrossDomain);
-
-
-//Starting Redis Server
-redis_client = redis.createClient({
-  port: process.env.TS_REDIS_PORT,
-  host: process.env.TS_REDIS_HOST
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
