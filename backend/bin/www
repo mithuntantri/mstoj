@@ -5,25 +5,7 @@ var express = require('express');
 const https = require('https');
 const fs = require('fs');
 
-var r = require('rethinkdb');
-var config = require('../database/rethinkConfig');
-var rethinkOps = require('../store/rethinkOps');
 var store = require("../store/store")
-
-r.connect(config.rethinkdb, function(err, conn) {
-    if (err) {
-        console.log("Could not open a connection to initialize the database");
-        console.log(err.message);
-        process.exit(1);
-    }
-    store.rethink_conn = conn
-    rethinkOps.createRethinkDatabase().then(()=>{
-      rethinkOps.createRethinkTable(`tutorials`).then(()=>{
-        console.log("[*] RethinkDB up and running")
-        startExpress()
-      })
-    });
-});
 
 /**
  * Get port from environment and store in Express.
