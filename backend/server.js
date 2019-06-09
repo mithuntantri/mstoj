@@ -10,7 +10,7 @@ var dbConn = require('./database/databaseConnection');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var exec = require('child_process').exec;
-
+var redis = require('redis')
 var index = require('./routes/index');
 var admin = require('./routes/admin');
 var login = require('./routes/login');
@@ -31,6 +31,12 @@ var allowCrossDomain = function(req, res, next) {
     next();
 };
 app.use(allowCrossDomain);
+
+//Starting Redis Server
+redis_client = redis.createClient({
+  port: process.env.TS_REDIS_PORT,
+  host: process.env.TS_REDIS_HOST
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
