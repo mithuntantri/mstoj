@@ -11,9 +11,6 @@ var jwt = require('jwt-simple');
 var moment = require('moment');
 var exec = require('child_process').exec;
 
-var config = require("./database/rethinkConfig")
-var r = require('rethinkdb')
-
 var index = require('./routes/index');
 var admin = require('./routes/admin');
 var login = require('./routes/login');
@@ -60,9 +57,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-// Middleware that will create a connection to rethinkdb
-app.use(createConnection)
 
 var baseUrl = process.env.TS_BASE_URL;
 
@@ -130,15 +124,8 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-app.use(closeConnection)
-
 function restartInstance(command, callback){
     exec(command, function(error, stdout, stderr){ callback(stdout); });
-}
-
-function restartRethink(){
-  app.use(closeConnection)
-  app.use(createConnection)
 }
 
 /*
@@ -148,23 +135,6 @@ function handleError(res) {
     return function(error) {
         res.send(500, {error: error.message});
     }
-}
-
-/*
- * Create a RethinkDB connection, and save it in req._rdbConn
- */
-function createConnection(req, res, next) {
-    r.connect(config.rethinkdb).then(function(conn) {
-        req._rdbConn = conn;
-        next();
-    }).error(handleError(res));
-}
-
-/*
- * Close the RethinkDB connection
- */
-function closeConnection(req, res, next) {
-    req._rdbConn.close();
 }
 
 mysqlOps.createDatabase()

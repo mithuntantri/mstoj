@@ -29,6 +29,7 @@ function startExpress(){
   server.on('listening', onListening);
 }
 
+startExpress()
 
 /**
  * Normalize a port into a number, string, or false.
