@@ -1,0 +1,26 @@
+{
+  "name": "io.cordova.boilerplatecordova",
+  "version": "1.0.0",
+  "displayName": "Boilerplate Cordova",
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-x-toast": {},
+      "cordova-plugin-otp-auto-verification": {},
+      "cordova-plugin-CDVNavBar": {},
+      "onesignal-cordova-plugin": {}
+    }
+  },
+  "dependencies": {
+    "cordova-android": "~7.0.0",
+    "cordova-plugin-cdvnavbar": "^2.5.0",
+    "cordova-plugin-otp-auto-verification": "^1.0.1",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-x-toast": "^2.7.2",
+    "hammer": "0.0.5",
+    "onesignal-cordova-plugin": "2.4.6"
+  }
+}

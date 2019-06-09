@@ -1,0 +1,58 @@
+{
+  "_from": "cordova-plugin-cdvnavbar",
+  "_id": "cordova-plugin-cdvnavbar@2.5.0",
+  "_inBundle": false,
+  "_integrity": "sha512-Hj4xhIbgzXc1ovYp73Fw5rdOj1CE3ll6cbLo9Za7xhxJpZdS5EXRyHTBR7QyzVu6YVu9yZthCfhrGsTCWFb52Q==",
+  "_location": "/cordova-plugin-cdvnavbar",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-cdvnavbar",
+    "name": "cordova-plugin-cdvnavbar",
+    "escapedName": "cordova-plugin-cdvnavbar",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-cdvnavbar/-/cordova-plugin-cdvnavbar-2.5.0.tgz",
+  "_shasum": "7a35b22e30c95f160a645c854375fb15448c81e2",
+  "_spec": "cordova-plugin-cdvnavbar",
+  "_where": "/home/mithuntantri/mithuntantri/mstoj/mstoj",
+  "author": {
+    "name": "Lifetimecode.com"
+  },
+  "bugs": {
+    "url": "https://github.com/Emadello/cordova-plugin-CDVNavBar/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-CDVNavBar",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "Add Native NavigationBar to your Cordova Applications with Drawer",
+  "homepage": "https://github.com/Emadello/cordova-plugin-CDVNavBar#readme",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova",
+    "drawer",
+    "slidemenu",
+    "navigationbar",
+    "cordova-ios",
+    "native"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-cdvnavbar",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emadello/cordova-plugin-CDVNavBar.git"
+  },
+  "version": "2.5.0"
+}

@@ -1,0 +1,4 @@
+#Fri Jun 07 18:40:34 IST 2019
+base.0=/home/mithuntantri/.mithuntantri/mstoj/mstojAdmin/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+renamed.0=classes.dex
+file.0=/home/mithuntantri/.mithuntantri/mstoj/mstojAdmin/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex

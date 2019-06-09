@@ -1,0 +1,28 @@
+TOJ Products,Product Category,Product Level
+Coolant,Coolant,all
+Oil Filter,Filter,all
+Air Filter,Filter,iws
+Brake Fluid,Brake,iws
+Spark Plug,Misc,iws
+CLUTCH - BEARING,Clutch,all
+CLUTCH - COVER ASSY,Clutch,all
+CLUTCH - CYLINDER ASSY,Clutch,all
+CLUTCH - DISC,Clutch,all
+CLUTCH - SET,Clutch,all
+Clutch Kit,Clutch,all
+Brake Pad,Brake,all
+Brake Shoe,Brake,all
+BEARING -Wheel,Misc,iws
+HEADLAMP,Misc,iws
+TAIL LIGHT,Misc,iws
+AIR DRYING SEALER,Misc,iws
+MASKING TAPE,Misc,iws
+SEALENT,Misc,iws
+RUST SMASH,Misc,iws
+Arm Assy - Front,Arm,ddt
+Arm Assy - Rear,Arm,ddt
+Shock Absorber,Misc,ddt
+Struts - Strut Assy,Struts,ddt
+Struts - Strut Set,Struts,ddt
+Wiper Blade,Wiper,ddt
+Wiper Kit,Wiper,ddt

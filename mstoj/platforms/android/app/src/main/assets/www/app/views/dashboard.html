@@ -1,0 +1,310 @@
+<div id="cont">
+<div class="add-panel" style="display: none;">
+  <div id="add-panel-switch" class="switch">
+    <div ng-click="drawer.togglePlus()" class="action-button option one">
+      2
+    </div>
+    <div ng-click="drawer.togglePlus()" class="action-button option two">
+      1
+    </div>
+    <div ng-click="drawer.togglePlus()" class="action-button plus">
+      <span>
+      +
+      </span>
+    </div>
+  </div>
+</div>
+<div ng-click="drawer.show()" class="fixed" id="topbar">
+  <div class="title">
+    {{ title }}
+  </div>
+</div>
+<div class="add-btn" ng-click="addFeature();drawer.hide()" ng-if="selectedFeature != 5">
+  <i class="fa fa-plus" style="font-size: 23px;"></i>
+</div>
+<!-- toggle icon for toggling menu -->
+<a href="#" class="menu-icon" id="nav-toggle">
+  <span></span>
+</a>
+<!-- stripe on the left of the screen to detect slide from side of the screen -->
+<div id="swipe-stripe"></div>
+<!-- body of the menu drawer -->
+<div id="drawer">
+  <div class="drawer large" id="topbar">
+    <!-- <img src="http://placehold.it/120/120" class="gravatar" /> -->
+    <div class="username">
+      <strong>{{User.UserDetails.name?"Welcome, " + User.UserDetails.name:"Welcome, IWS"}}</strong>
+      <br />
+      {{User.UserDetails.iws_code}}
+  </div>
+  </div>
+  <ul class="nav" ng-controller="DashboardController">
+    <!-- <li style="border-bottom: 0px;font-weight: bold;">
+      <a>Products</a>
+    </li>
+    <li ng-repeat="f in User.ProductCategories track by $index"
+    ng-click="showDashboard($index);drawer.hide()"><a>{{f.product_name}}</a></li> -->
+    <li style="border-bottom: 0px;font-weight: bold;">
+      <a>Settings</a>
+    </li>
+    <li ng-click="showDashboard(0);drawer.hide()">
+      <a>Profile</a>
+    </li>
+    <li ng-click="showDashboard(1);drawer.hide()">
+      <a>Requests</a>
+    </li>
+    <div class="bottom">
+      <li ng-click="logout();drawer.hide()"><a>Log Out</a></li>
+    </div>
+  </ul>
+</div>
+<!-- takes care of the overlay dimming -->
+<div ng-click="drawer.hide(); drawer.togglePlus(true);" id="drawer-dimm"></div>
+<!-- your part of the code, views etc.. -->
+<ion-scroll direction="y" zooming="false" id="view-content">
+    <div class="sort-filter-container">
+      <div class="sort-btn" ng-click="openSort()">
+        <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+        <span>Sort</span>
+      </div>
+      <!-- <div class="filter-btn">
+        <i class="fa fa-filter" aria-hidden="true"></i>
+        <span>Filter</span>
+      </div> -->
+    </div>
+    <div class="radio-container">
+      <div class="checkbox">
+        <label class="container" style="margin: 0;">Only show results which are not yet availed
+          <input type="checkbox" ng-model="notAvailed" ng-change="filter()">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+    <div class="selector-container" ng-show="!showDefault">
+      <div class="selector-row-container" 
+        ng-click="openRequestParts($index)"
+        ng-repeat="data in expanded_targets">
+        <div class="selector-row">
+          <img ng-src="assets/img/{{data.product_category | getProductImage}}" 
+            ng-class="{'dull': data.availed_quantity == data.target_quantity}" />
+          <div class="tick" ng-if="data.availed_quantity == data.target_quantity">
+            <img src="assets/img/check.png"/>
+          </div>
+          <div class="product-desc">
+            <div class="title">{{data.product_category}}</div>
+            <div>{{data.discount}}% Discount</div>
+          </div>
+          <div class="target-desc">
+            <div>Total Availed</div>
+            <div class="value">
+              <div>{{data.availed_quantity}} / {{data.target_quantity}}</div>
+              <div class="star
+
+              "><i class="fa fa-star gold"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="selector-graph" ng-if="data.target_quantity != 0">
+          <div style="width: 72px;"></div>
+          <div class="bar green-bg" ng-style="{'width': data.completed}"></div>
+          <div class="bar grey-bg"  ng-style="{'width': data.remaining}"></div>
+        </div>
+        <div class="coupon-container light-grey-bg"  ng-if="data.availed_quantity != data.target_quantity">
+          <div class="coupon-title">COUPON CODE:</div>
+          <div class="coupon-value">{{data.ticket_number}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="selector-container" ng-repeat="t in User.Targets" ng-show="showDefault">
+      <div class="selector" ng-click="toggleProduct($index)">
+        <div class="title">{{t.type}} ({{t.data.length}})</div>
+        <div class="chart">
+          <div class="green" style="width: 55%;">{{t.completed_tickets}}</div>
+          <div class="white" style="width: 45%;">{{t.total_tickets}}</div>
+        </div>
+        <div class="total">{{t.completed?t.completed:0}}%</div>
+        <div class="opener">
+          <i class="fa fa-caret-up" ng-if="t.selected"></i>
+          <i class="fa fa-caret-down" ng-if="!t.selected"></i>
+        </div>
+      </div>
+      <div class="selector-row-container" 
+      ng-click="openRequestParts($parent.$index, $index)"
+      ng-repeat="data in t.data" ng-if="t.selected">
+        <div class="selector-row">
+          <img ng-src="assets/img/{{data.product_category | getProductImage}}" 
+            ng-class="{'dull': data.availed_quantity == data.target_quantity}" />
+          <div class="tick" ng-if="data.availed_quantity == data.target_quantity">
+            <img src="assets/img/check.png"/>
+          </div>
+          <div class="product-desc">
+            <div class="title">{{data.product_category}}</div>
+            <div>{{data.discount}}% Discount</div>
+          </div>
+          <div class="target-desc">
+            <div>Total Availed</div>
+            <div class="value">
+              <div>{{data.availed_quantity}} / {{data.target_quantity}}</div>
+              <div class="star
+
+              "><i class="fa fa-star gold"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="selector-graph" ng-if="data.target_quantity != 0">
+          <div style="width: 72px;"></div>
+          <div class="bar green-bg" ng-style="{'width': data.completed}"></div>
+          <div class="bar grey-bg"  ng-style="{'width': data.remaining}"></div>
+        </div>
+        <div class="coupon-container light-grey-bg"  ng-if="data.availed_quantity != data.target_quantity">
+          <div class="coupon-title">COUPON CODE:</div>
+          <div class="coupon-value">{{data.ticket_number}}</div>
+        </div>
+      </div>
+    </div>
+      <!-- <div ng-view=""></div> -->
+</ion-scroll>
+</div>
+<div class="modal fade" id="lab-slide-bottom-popup-request-parts" data-keyboard="false" data-backdrop="false">
+    <div class="lab-modal">
+      <div class="lab-modal-head">
+        <div class="modal-title-container">
+          <span class="modal-title">DigiTouch</span>
+        </div>
+        <div class="modal-desc-container">
+          <div class="modal-desc">You can request here for more parts and get it approved instantly</div>
+          <img class="logo-ticket-half" src="assets/img/ticket4.png"/>
+        </div>
+      </div>
+      <div class="lab-modal-body register">
+        <div class="signup-email-input-container material-input-wrapper">
+          <div class="signup-email-input-container material-input-wrapper">
+            <label class="signup-email-text">
+            Selected Product
+            </label>
+            <div class="mobile-number-container">
+              <input class="login-signup-email-input login-email-exist-input" 
+                ng-model="User.request.selectedProduct" type="text" ng-disabled="true"
+                id="test-username-input"/>
+            </div>
+          </div>
+          <div class="signup-email-input-container material-input-wrapper">
+            <label class="signup-email-text">
+            How many more quantities do you need?
+            </label>
+            <div class="iws-number-container">
+              <input class="login-signup-email-input login-email-exist-input" 
+                ng-model="User.request.quantity" type="number" min="1" ng-disabled="showOTP"
+                id="test-username-input"/>
+            </div>
+          </div>
+        </div>
+      <div class="part3 btn-container" style="margin-top: 30px;padding-bottom: 30px;">
+        <div class="continue-btn" ng-click="requestParts()">
+          <div class="loader inside-btn" ng-if="showBtnLoader"></div>
+          <span ng-if="!showBtnLoader">Request</span>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="lab-slide-bottom-popup-profile" data-keyboard="false" data-backdrop="false">
+    <div class="lab-modal">
+      <div class="lab-modal-head">
+        <div class="modal-title-container">
+          <span class="modal-title">DigiTouch</span>
+        </div>
+        <div class="modal-desc-container">
+          <div class="modal-desc">Update your profile and be updated with important notifications</div>
+          <img class="logo-ticket-half" src="assets/img/ticket4.png"/>
+        </div>
+      </div>
+      <div class="lab-modal-body register">
+        <div class="signup-email-input-container material-input-wrapper">
+          <label class="signup-email-text">
+          Email Address
+          </label>
+          <div class="mobile-number-container">
+            <input class="login-signup-email-input login-email-exist-input" 
+              ng-model="User.UserDetails.email" type="email" ng-disabled="showOTP"
+              id="test-username-input" style="text-transform: uppercase;padding: 8px 70px;"/>
+          </div>
+        </div>
+        <div class="signup-email-input-container material-input-wrapper">
+          <label class="signup-email-text">
+          Primary Mobile Number
+          </label>
+          <div class="mobile-number-container">
+            <span class="country-code">IN&nbsp;&nbsp;+91</span>
+            <input class="login-signup-email-input login-email-exist-input" 
+              ng-model="User.UserDetails.primary_mobile" type="number" ng-disabled="showOTP"
+              id="test-username-input" style="text-transform: uppercase;padding: 8px 70px;"/>
+          </div>
+        </div>
+        <div class="signup-email-input-container material-input-wrapper">
+          <label class="signup-email-text">
+          Secondary Mobile Number
+          </label>
+          <div class="mobile-number-container">
+            <span class="country-code">IN&nbsp;&nbsp;+91</span>
+            <input class="login-signup-email-input login-email-exist-input" 
+              ng-model="User.UserDetails.secondary_mobile" type="number" ng-disabled="showOTP"
+              id="test-username-input" style="text-transform: uppercase;padding: 8px 70px;"/>
+          </div>
+        </div>
+      <div class="part3 btn-container" style="margin-top: 30px;padding-bottom: 30px;">
+        <div class="continue-btn" ng-click="updateProfile()">
+          <div class="loader inside-btn" ng-if="showBtnLoader"></div>
+          <span ng-if="!showBtnLoader">Update</span>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="lab-slide-bottom-popup-sort" style="background: #fff;" 
+  data-keyboard="false" data-backdrop="false">
+    <div class="lab-modal">
+      <div class="lab-modal-head">
+        <div class="modal-title-container">
+          <span class="modal-title">DigiTouch</span>
+        </div>
+        <div class="modal-desc-container">
+          <div class="modal-desc">Sort your dashboard & find products easily</div>
+          <img class="logo-ticket-half" src="assets/img/ticket4.png"/>
+        </div>
+      </div>
+      <div style="display: flex;flex-direction: column;font-family: 'GlacialIndifference-Regular';font-size: 17px;line-height: 20px;padding: 25px;">
+        <div style="display: flex;flex-direction: row;justify-content: space-between;font-size: 19px;padding: 12px 0;border-bottom: 1px solid #f1f1f1;">
+          <label for="default">Default Category Sort</label>
+          <input name="sort" id="default" type="radio" ng-model="sortOptions" value="default"
+          ng-change="selectSort(0)"/>
+        </div>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;font-size: 19px;padding: 12px 0;border-bottom: 1px solid #f1f1f1;">
+          <label for="by_discount_lh">Discount (Low to High)</label>
+          <input name="sort"  id="by_discount_lh" type="radio" ng-model="sortOptions" value="disc_lh" ng-change="selectSort(1)"/>
+        </div>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;font-size: 19px;padding: 12px 0;border-bottom: 1px solid #f1f1f1;">
+          <label for="by_discount_hl">Discount (High to Low)</label>
+          <input name="sort"  id="by_discount_hl" type="radio" ng-model="sortOptions" value="disc_hl" ng-change="selectSort(2)"/>
+        </div>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;font-size: 19px;padding: 12px 0;border-bottom: 1px solid #f1f1f1;">
+          <label for="by_baseprice_lh">Base Price (Low to High)</label>
+          <input name="sort"  id="by_baseprice_lh" type="radio" ng-model="sortOptions" value="baseprice_lh"  ng-change="selectSort(3)"/>
+        </div>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;font-size: 19px;padding: 12px 0;border-bottom: 1px solid #f1f1f1;">
+          <label for="by_baseprice_hl">Base Price (High to Low)</label>
+          <input name="sort"  id="by_baseprice_hl" type="radio" ng-model="sortOptions" value="baseprice_hl"  ng-change="selectSort(4)"/>
+        </div>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;font-size: 19px;padding: 12px 0;border-bottom: 1px solid #f1f1f1;">
+          <label for="by_target_achvd_lh">Target Achieved (Low to High)</label>
+          <input name="sort"  id="by_target_achvd_lh" type="radio" ng-model="sortOptions" value="achieved_lh" ng-change="selectSort(5)"/>
+        </div>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;font-size: 19px;padding: 12px 0;border-bottom: 1px solid #f1f1f1;">
+          <label for="by_target_achvd_hl">Target Achieved (High to Low)</label>
+          <input name="sort"  id="by_target_achvd_hl" type="radio" ng-model="sortOptions" value="achieved_hl" ng-change="selectSort(6)"/>
+        </div>
+      </div>
+    </div>
+  </div>

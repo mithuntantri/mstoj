@@ -1,0 +1,182 @@
+<div class="grey-50 has-header has-sub-header" id="dashboardContainer" style="font-family: 'GlacialIndifference-Regular'">
+  <div class="header green-900" style="background-color: #f09819 !important;position: relative;">
+    <h1 style="font-size: 19px;margin: 0; height: 50px;line-height: 52px;padding: 0 12px;font-family: 'JMHCthulhumbusUG';">DigiTouch (Admin)</h1>
+    <div class="right" style="position: absolute;top: 10px;right: 10px;">
+      <button class="icon ion-android-notifications" onclick="angular.element(document.getElementById('dashboardContainer')).scope().openNotifications()" style="color: white;font-size: 24px;"></button>
+      <button class="icon ion-android-exit" onclick="angular.element(document.getElementById('dashboardContainer')).scope().logout()" style="color: white;font-size: 24px;"></button>
+    </div>
+  </div>
+  <div class="header green-900 sub shadow tab" style="background-color: #f09819 !important;font-size: 15px;" ng-show="!openResult">
+    <button class="text-white active" id="dashboardtab" onclick="openTab('dashboard');angular.element(document.getElementById('dashboardContainer')).scope().getTab('dashboard')">
+      DASHBOARD 
+      <!-- <span class="badge white text-green-900">1</span> -->
+    </button>
+    <button class="text-white" id="categorywisetab" onclick="openTab('categorywise');angular.element(document.getElementById('dashboardContainer')).scope().getTab('categorywise')">Category Wise</button>
+    <button class="text-white" id="locationwisetab" onclick="openTab('locationwise');angular.element(document.getElementById('dashboardContainer')).scope().getTab('locationwise')">Location Wise</button>
+  </div>
+  <div class="tab-content active" id='dashboard' style="padding: 15px;background-color: white;">
+    <div class="loaders" ng-if="!showDashboard"><div class="four"></div></div>
+    <div style="display: flex;flex-direction: column;" ng-show="showDashboard">
+      <div>Welcome, <span id="name"></span></div>
+       <div class="header green-900 sub shadow tab" style="background-color: #fff !important;font-size: 15px;margin: 7px 0;">
+      <input class="search-input" ng-focus="openResult = true;searchInput = null;showIWSDetails=false" ng-blur="openResult = false;searchInput = null" placeholder="Search IWS Code / IWS Name" type="text" name="search" ng-model="searchInput" ng-change="startSearch()" ng-model-options="{'debounce':300}"/>
+    </div>
+    <ul ng-if="searchResult.length > 0 && !showIWSDetails">
+        <li ng-repeat="result in searchResult" ng-click="openIWS($index);$event.stopPropagation()" 
+          style="display: flex;flex-direction: column;border-bottom: 1px solid #f5f5f5;padding: 7px 12px;">
+          <div style="font-size: 17px;">{{result.name}}&nbsp;(<b>{{result.iws_code}}</b>)</div>
+          <div style="font-size: 15px;">{{result.email}} - {{result.primary_mobile}}</div>
+        </li>
+      </ul>
+      <div ng-if="searchResult.length > 0 && showIWSDetails">
+        <div style="display: flex;flex-direction: row;justify-content: space-between;margin: 12px 0;">
+          <div style="display: flex;flex-direction: column;">
+            <div style="font-size: 17px;font-weight: bold;">{{IWSDetails.data.iws_code}}</div>
+            <div>IWS Code</div>
+          </div>
+          <div style="display: flex;flex-direction: column;">
+            <div style="font-size: 17px;font-weight: bold;">{{IWSDetails.loc_code}}</div>
+            <div>Location Code</div>
+          </div>
+        </div>
+        <div style="display: flex;flex-direction: column;margin: 12px 0;">
+          <div style="font-size: 17px;font-weight: bold;">{{IWSDetails.data.name}}</div>
+          <div>IWS Name</div>
+        </div>
+        <div style="display: flex;flex-direction: row;justify-content: space-between;margin: 12px 0;">
+          <div style="display: flex;flex-direction: column;"> 
+            <div style="font-size: 17px;font-weight: bold;">{{IWSDetails.data.email}}</div>
+            <div>Email Address</div>
+          </div>
+          <div style="display: flex;flex-direction: column;"> 
+            <div style="font-size: 17px;font-weight: bold;">{{IWSDetails.data.primary_mobile}}</div>
+            <div>Primary Mobile</div>
+          </div>
+        </div>
+        <table class="tableBodyScroll" style="width: 100%;">
+          <thead>
+            <tr style="height: 50px;border-bottom: 1px solid #f1f1f1;">
+              <th>Product</th>
+              <th style="text-align: right;min-width: 65px;">Actuals</th>
+              <th style="text-align: right;min-width: 65px;">Target</th>
+              <th style="text-align: right;min-width: 65px;">Variance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="height: 50px;border-bottom: 1px solid #f1f1f1;" ng-repeat="data in IWSDetails.products">
+              <td>{{data.product_name}}</td>
+              <td style="text-align: right;">{{data.total_quantity}}</td>
+              <td style="text-align: right;">{{data.target_quantity}}</td>
+              <td style="text-align: right;">{{data.target_quantity - data.total_quantity}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="donutChart" style="margin: 20px 0;" ng-show="!openResult && !searchResult.length > 0 && !showIWSDetails">
+        <div class="info">
+          <div class="value">
+            <div style="font-size: 17px;margin: 5px 0;">IWS Tickets</div>
+            <div>{{User.DashboardDetails.actuals}} / {{User.DashboardDetails.target}}</div>
+          </div>
+        </div>
+        <svg viewBox="0 0 180 180" preserveAspectRatio="xMaxYMax meet">
+          <circle class="circle-back" r="80" cx="90" cy="90"></circle>
+          <circle class="circle-front" r="75" cx="90" cy="90" stroke-linecap="round"></circle>
+        </svg>
+      </div>
+      <div style="display: flex;flex-direction: row;justify-content: space-between;text-align: center;background-color: white;" ng-show="!openResult && !searchResult.length > 0 && !showIWSDetails">
+        <div class="outer">
+          <div class="inner">
+            <table style="width: 100%;">
+              <thead>
+                <tr style="height: 50px;border-bottom: 1px solid #f1f1f1;">
+                  <th class="fix">IWS Category</th>
+                  <th style="width: 10%;text-align: right;margin: 0 2px !important;">Total IWS</th>
+                  <th style="width: 15%;min-width:65px;text-align: right;margin: 0 2px !important;">Actuals</th>
+                  <th style="width: 15%;min-width:65px;text-align: right;margin: 0 2px !important;">Target</th>
+                  <th style="width: 18%;min-width:65px;text-align: right;margin: 0 2px !important;">Addl. Payout</th>
+                  <th style="width: 18%;min-width:65px;text-align: right;margin: 0 2px !important;">Addl. %Payout</th>
+                  <th style="width: 15%;min-width:65px;text-align: right;margin: 0 2px !important;">Focus Part Retails</th>
+                  <th style="width: 18%;min-width:65px;text-align: right;margin: 0 0 0 2px !important;">%Target achvd</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="height: 50px;border-bottom: 1px solid #f1f1f1;" 
+                  ng-repeat="(key, value) in dashboardCategories">
+                  <td class="fix">{{key}}</td>
+                  <td style="text-align: right;">{{value.length}}</td>
+                  <td style="text-align: right;">{{value | getTotalActuals}}</td>
+                  <td style="text-align: right;">{{value | getTotalTargets}}</td>
+                  <td style="text-align: right;">{{value | getTotalRequests}}</td>
+                  <td style="text-align: right;">{{value | getTotalPcRequests}}</td>
+                  <td style="text-align: right;">{{value | getFocusPartRetails}}</td>
+                  <th style="text-align: right;margin: 0 0 0 2px;">{{value | getTargetAchieved}}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex;flex-direction: column;justify-content: space-between;text-align: center;background-color: white;" ng-show="openResult">
+        <div style="display: flex;flex-direction: column;" ng-if="searchResult.length == 0">
+          <img style="margin: 20px auto;width: 150px;" src="assets/img/download.png"/>
+          <div style="font-size: 15px;text-align: center;margin: 0 7px;">No results for the search</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-content" id="categorywise">
+    <div class="loaders" ng-if="!showCategoryWise"><div class="four"></div></div>
+    <div ng-if="showCategoryWise" style="padding: 15px 10px;background: white;">
+      <table style="width: 100%;">
+        <thead>
+          <tr style="height: 50px;border-bottom: 1px solid #f1f1f1;">
+            <th>Category</th>
+            <th style="text-align: right;">Total IWS</th>
+            <th style="text-align: right;min-width: 65px;">Actuals</th>
+            <th style="text-align: right;min-width: 65px;">Target</th>
+            <th style="text-align: right;min-width: 65px;">Variance</th>
+            <th style="min-width: 30px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="height: 50px;border-bottom: 1px solid #f1f1f1;" ng-repeat="data in User.CategoryWiseDetails" ng-click="drilldown('category', 1, data.iws_category, '', '')">
+            <td>{{data.iws_category}}</td>
+            <td style="text-align: right;">{{data.total_iws}}</td>
+            <td style="text-align: right;">{{data.actuals}}</td>
+            <td style="text-align: right;">{{data.target}}</td>
+            <td style="text-align: right;">{{data.target - data.actuals}}</td>
+            <td style="min-width: 30px;text-align: center;"><span class="fa fa-chevron-right"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="tab-content" id="locationwise">
+    <div class="loaders" ng-if="!showLocationWise"><div class="four"></div></div>
+    <div ng-if="showLocationWise" style="padding: 15px 10px;background: white;">
+      <table style="width: 100%;">
+        <thead>
+          <tr style="height: 50px;border-bottom: 1px solid #f1f1f1;">
+            <th>LOC Code</th>
+            <th style="text-align: right;">Total IWS</th>
+            <th style="text-align: right;min-width: 65px;">Actuals</th>
+            <th style="text-align: right;min-width: 65px;">Target</th>
+            <th style="text-align: right;min-width: 65px;">Variance</th>
+            <th style="min-width: 30px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="height: 50px;border-bottom: 1px solid #f1f1f1;" ng-repeat="data in User.LocationWiseDetails" ng-click="drilldown('location', 1, data.loc_code, '', '')">
+            <td>{{data.loc_code}}</td>
+            <td style="text-align: right;">{{data.total_iws}}</td>
+            <td style="text-align: right;">{{data.actuals}}</td>
+            <td style="text-align: right;">{{data.target}}</td>
+            <td style="text-align: right;">{{data.target - data.actuals}}</td>
+            <td style="min-width: 30px;text-align: center;"><span class="fa fa-chevron-right"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

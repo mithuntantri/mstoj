@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.marutisuzki.ticketsofjoy" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Toast">
+        <param name="android-package" value="nl.xservices.plugins.Toast" />
+    </feature>
+    <feature name="OTPAutoVerification">
+        <param name="android-package" value="org.apache.cordova.OTPAutoVerification.OTPAutoVerification" />
+    </feature>
+    <feature name="OneSignalPush">
+        <param name="android-package" value="com.plugin.gcm.OneSignalPush" />
+    </feature>
+    <name>DigiTouch</name>
+    <description>
+        Maruti Suzuki Internal App
+    </description>
+    <author email="email@gmail.com" href="www.example.com">
+        Mithun Tantri
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <icon density="hdpi" src="ic_launcher/res/mipmap-hdpi/ic_launcher.png" />
+    <icon density="xhdpi" src="ic_launcher/res/mipmap-xhdpi/ic_launcher.png" />
+    <icon density="xxhdpi" src="ic_launcher/res/mipmap-xxhdpi/ic_launcher.png" />
+    <icon density="xxxhdpi" src="ic_launcher/res/mipmap-xxxhdpi/ic_launcher.png" />
+    <allow-intent href="market:*" />
+    <preference name="loglevel" value="DEBUG" />
+</widget>

@@ -1,0 +1,38 @@
+<div class="container">
+	<div class="ui-container" style="background: #fff">
+		<img src="images/maroor_digi_touch.png" style="width: 200px;
+    position: absolute;
+    top: 40%;
+    bottom: 0;
+    left: 8%;
+    right: 0;" />
+		<div class="right-side">
+			<div class="login-container">
+				<form>
+					<div class="errorMessage">
+						<span ng-if="errorMessage">**{{errorMessage}}</span>
+					</div>
+					<div class="username-container">
+						<div class="binput">
+							<input type="text" class="username" ng-model="login.username" placeholder="Enter Username">
+						</div>
+					</div>
+					<div class="password-container">
+						<div class="binput">
+							<input type="password" ng-model="login.password" placeholder="ENTER PASSWORD">
+						</div>
+					</div>
+
+					<div class="loader-container" ng-if="Login.loggingIn">
+						<div class="Spinner"></div>
+					</div>
+					<div class="btn-container">
+						<input class="btn signin" type="submit" value="SIGN IN"
+							ng-click="adminLogin()"/>
+					</div>
+					<div class="forgot-pw">Forgot Password?</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

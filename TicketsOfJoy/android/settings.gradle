@@ -1,0 +1,3 @@
+rootProject.name = 'TicketsOfJoy'
+
+include ':app'

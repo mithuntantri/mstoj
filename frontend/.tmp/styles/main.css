@@ -1,0 +1,1166 @@
+@font-face {
+  font-family: 'GlacialIndifference-Regular';
+  src: url(../fonts/GlacialIndifference-Regular.ttf);
+}
+@font-face {
+  font-family: 'GlacialIndifference-Bold';
+  src: url(../fonts/GlacialIndifference-Bold.otf);
+}
+/* line 11, ../../app/styles/_login.scss */
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* line 18, ../../app/styles/_login.scss */
+md-toast.md-success-toast-theme .md-toast-content {
+  font-family: 'GlacialIndifference-Regular';
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+/* line 26, ../../app/styles/_login.scss */
+md-toast.md-error-toast-theme .md-toast-content {
+  font-family: 'GlacialIndifference-Regular';
+  background-color: #ff2d5a;
+  color: #fff;
+}
+
+/* line 33, ../../app/styles/_login.scss */
+.loader-container {
+  opacity: 0.5 !important;
+  background: 0 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+/* line 42, ../../app/styles/_login.scss */
+.errorMessage {
+  font-family: 'GlacialIndifference-Regular';
+  color: #ff4d5a;
+  width: 75%;
+  margin: 50px auto 0;
+  min-height: 45px;
+  font-size: 13px;
+}
+
+/* line 51, ../../app/styles/_login.scss */
+.container {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(45deg, #282747, #3f3d70);
+}
+
+/* line 57, ../../app/styles/_login.scss */
+*:focus {
+  outline: none;
+}
+
+/* line 61, ../../app/styles/_login.scss */
+.ui-container {
+  width: 50%;
+  max-width: 680px;
+  height: 400px;
+  max-height: 400px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0px 0px 189px -41px rgba(0, 0, 0, 0.75);
+  transition: all 300ms ease-in-out;
+}
+
+/* line 76, ../../app/styles/_login.scss */
+.left-side {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(45deg, #282747, #3f3d70);
+  overflow: hidden;
+}
+
+/* line 86, ../../app/styles/_login.scss */
+.big-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* line 92, ../../app/styles/_login.scss */
+.big-image img {
+  width: 60%;
+  height: 60%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+/* line 103, ../../app/styles/_login.scss */
+.big-image img:hover {
+  transform: translate(-50%, -50%) rotate(10deg);
+}
+
+/* line 107, ../../app/styles/_login.scss */
+.star {
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  animation: staranimation 3s linear;
+}
+
+/* line 117, ../../app/styles/_login.scss */
+.star:nth-child(1) {
+  top: 10%;
+  left: 10%;
+  width: 2.5px;
+  height: 2.5px;
+}
+
+/* line 124, ../../app/styles/_login.scss */
+.star:nth-child(2) {
+  top: 90%;
+  left: 75%;
+  width: 8px;
+  height: 8px;
+}
+
+/* line 131, ../../app/styles/_login.scss */
+.star:nth-child(3) {
+  top: 35%;
+  left: 85%;
+}
+
+/* line 136, ../../app/styles/_login.scss */
+.star:nth-child(4) {
+  top: 90%;
+  left: 10%;
+  width: 10px;
+  height: 10px;
+}
+
+/* line 143, ../../app/styles/_login.scss */
+.star:nth-child(5) {
+  top: 30%;
+  left: 35%;
+  width: 4px;
+  height: 4px;
+}
+
+/* line 150, ../../app/styles/_login.scss */
+.star:nth-child(6) {
+  top: 55%;
+  left: 10%;
+  width: 5px;
+  height: 5px;
+}
+
+/* line 157, ../../app/styles/_login.scss */
+.star:nth-child(7) {
+  top: 5%;
+  left: 90%;
+  width: 2.5px;
+  height: 2.5px;
+}
+
+@keyframes staranimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* line 173, ../../app/styles/_login.scss */
+.shooting-star {
+  width: 125px;
+  height: 1px;
+  background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  opacity: 0.25;
+}
+
+/* line 188, ../../app/styles/_login.scss */
+#st-one {
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  animation: shootingstaranimationvone 5s linear infinite;
+  animation-delay: 5s;
+}
+
+/* line 196, ../../app/styles/_login.scss */
+#st-two {
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  animation: shootingstaranimationvtwo 5s linear infinite;
+  animation-delay: 3s;
+}
+
+@keyframes shootingstaranimationvone {
+  0% {
+    top: 0%;
+    left: 50%;
+  }
+  100% {
+    top: 45%;
+    left: -20%;
+  }
+}
+@keyframes shootingstaranimationvtwo {
+  0% {
+    top: 0%;
+    left: 140%;
+  }
+  100% {
+    top: 100%;
+    left: -10%;
+  }
+}
+/* line 226, ../../app/styles/_login.scss */
+.title {
+  width: 100%;
+  color: #fff;
+  font-family: "GlacialIndifference-Regular";
+  font-size: 33px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 10px;
+  text-align: center;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 300ms ease-in-out;
+}
+
+/* line 242, ../../app/styles/_login.scss */
+.right-side {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #282747;
+  overflow: hidden;
+}
+
+/* line 252, ../../app/styles/_login.scss */
+.login-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* line 258, ../../app/styles/_login.scss */
+.username-container {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+
+/* line 264, ../../app/styles/_login.scss */
+.password-container {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+/* line 270, ../../app/styles/_login.scss */
+.binput {
+  width: 100%;
+  position: relative;
+}
+
+/* line 275, ../../app/styles/_login.scss */
+.binput:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #3f3d70;
+}
+
+/* line 285, ../../app/styles/_login.scss */
+.binput:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #5c589e;
+  transition: all 300ms ease-in-out;
+}
+
+/* line 296, ../../app/styles/_login.scss */
+.binput:hover:after {
+  width: 100%;
+}
+
+/* line 300, ../../app/styles/_login.scss */
+input {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 10px 0;
+  background-color: transparent;
+  color: #fff;
+  font-size: 17px;
+  letter-spacing: 2.5px;
+  transition: all 300ms ease-in-out;
+  position: relative;
+  cursor: pointer;
+  font-family: 'GlacialIndifference-Regular' !important;
+}
+
+/* line 315, ../../app/styles/_login.scss */
+input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 17px;
+  font-family: "GlacialIndifference-Regular";
+  letter-spacing: 2.5px;
+  transition: all 300ms ease-in-out;
+}
+input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 17px;
+  font-family: "GlacialIndifference-Regular";
+  letter-spacing: 2.5px;
+  transition: all 300ms ease-in-out;
+}
+
+/* line 323, ../../app/styles/_login.scss */
+.btn-container {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 25px;
+  text-align: center;
+}
+
+/* line 330, ../../app/styles/_login.scss */
+.btn {
+  color: #fff;
+  font-family: "GlacialIndifference-Regular", sans-serif;
+  font-size: 17px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  display: inline-block;
+  width: 40%;
+  padding: 10px 0;
+  border: 1px solid #3f3d70;
+  text-align: center;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 300ms ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* line 348, ../../app/styles/_login.scss */
+.btn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: rgba(82, 79, 137, 0.125);
+  transition: all 300ms ease-in-out;
+}
+
+/* line 359, ../../app/styles/_login.scss */
+.username {
+  text-transform: uppercase;
+}
+
+/* line 363, ../../app/styles/_login.scss */
+.btn:hover:before {
+  width: 100%;
+}
+
+/* line 367, ../../app/styles/_login.scss */
+.forgot-pw {
+  color: #fff;
+  font-family: "GlacialIndifference-Regular", sans-serif;
+  font-size: 17px;
+  margin-top: 100px;
+  text-align: center;
+  letter-spacing: 2.5px;
+  transition: all 300ms ease-in-out;
+  position: relative;
+  cursor: pointer;
+}
+
+/* line 379, ../../app/styles/_login.scss */
+.forgot-pw:before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 0;
+  height: 1px;
+  background-color: #3f3d70;
+  transition: all 300ms ease-in-out;
+}
+
+/* line 391, ../../app/styles/_login.scss */
+.forgot-pw:hover:before {
+  width: 12.5%;
+}
+
+/* line 395, ../../app/styles/_login.scss */
+.small-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* line 401, ../../app/styles/_login.scss */
+.small-image img {
+  width: 12.5%;
+  height: 12.5%;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+  opacity: 0.25;
+}
+
+/* line 413, ../../app/styles/_login.scss */
+.small-image img:hover {
+  transform: translate(-50%, -50%) rotate(10deg);
+}
+
+@media only screen and (max-width: 1400px) {
+  /* line 418, ../../app/styles/_login.scss */
+  .ui-container {
+    width: 75%;
+  }
+
+  /* line 422, ../../app/styles/_login.scss */
+  .big-image img {
+    width: 50%;
+    height: 50%;
+  }
+
+  /* line 427, ../../app/styles/_login.scss */
+  .title {
+    font-size: 29px;
+  }
+
+  /* line 431, ../../app/styles/_login.scss */
+  input,
+  input:-ms-input-placeholder {
+    font-size: 15px;
+  }
+  input,
+  input::placeholder {
+    font-size: 15px;
+  }
+
+  /* line 436, ../../app/styles/_login.scss */
+  .btn {
+    font-size: 13px;
+  }
+
+  /* line 440, ../../app/styles/_login.scss */
+  .forgot-pw {
+    margin-top: 20px;
+    font-size: 13px;
+  }
+}
+@media only screen and (max-height: 600px) {
+  /* line 447, ../../app/styles/_login.scss */
+  .ui-container {
+    width: 40%;
+    height: 400px;
+  }
+
+  /* line 452, ../../app/styles/_login.scss */
+  .big-image img {
+    width: 50%;
+    height: 50%;
+  }
+
+  /* line 457, ../../app/styles/_login.scss */
+  .title {
+    font-size: 29px;
+  }
+
+  /* line 461, ../../app/styles/_login.scss */
+  input,
+  input:-ms-input-placeholder {
+    font-size: 13px;
+  }
+  input,
+  input::placeholder {
+    font-size: 13px;
+  }
+
+  /* line 466, ../../app/styles/_login.scss */
+  .btn {
+    font-size: 13px;
+  }
+
+  /* line 470, ../../app/styles/_login.scss */
+  .username-container {
+    margin-top: 25px;
+  }
+
+  /* line 474, ../../app/styles/_login.scss */
+  .forgot-pw {
+    margin-top: 50px;
+    font-size: 13px;
+  }
+}
+@media only screen and (max-height: 400px) {
+  /* line 481, ../../app/styles/_login.scss */
+  .title {
+    font-size: 25px;
+  }
+
+  /* line 485, ../../app/styles/_login.scss */
+  .ui-container {
+    width: 30%;
+    height: 300px;
+  }
+
+  /* line 490, ../../app/styles/_login.scss */
+  .big-image img {
+    width: 50%;
+    height: 50%;
+  }
+
+  /* line 495, ../../app/styles/_login.scss */
+  .username-container {
+    margin-top: 20px;
+  }
+
+  /* line 499, ../../app/styles/_login.scss */
+  input,
+  input:-ms-input-placeholder {
+    font-size: 13px;
+  }
+  input,
+  input::placeholder {
+    font-size: 13px;
+  }
+
+  /* line 504, ../../app/styles/_login.scss */
+  .btn {
+    font-size: 9px;
+    padding: 5px 0;
+    margin-right: 5px;
+    margin-top: 0px;
+  }
+
+  /* line 511, ../../app/styles/_login.scss */
+  .forgot-pw {
+    margin-top: 35px;
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  /* line 518, ../../app/styles/_login.scss */
+  .ui-container {
+    width: 50%;
+  }
+
+  /* line 522, ../../app/styles/_login.scss */
+  .big-image img {
+    width: 50%;
+    height: 50%;
+  }
+
+  /* line 527, ../../app/styles/_login.scss */
+  .title {
+    font-size: 29px;
+  }
+
+  /* line 531, ../../app/styles/_login.scss */
+  input,
+  input:-ms-input-placeholder {
+    font-size: 15px;
+  }
+  input,
+  input::placeholder {
+    font-size: 15px;
+  }
+
+  /* line 536, ../../app/styles/_login.scss */
+  .btn {
+    font-size: 13px;
+  }
+
+  /* line 540, ../../app/styles/_login.scss */
+  .forgot-pw {
+    margin-top: 20px;
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 900px) {
+  /* line 547, ../../app/styles/_login.scss */
+  .ui-container {
+    width: 85%;
+    height: 325px;
+  }
+
+  /* line 552, ../../app/styles/_login.scss */
+  .big-image img {
+    width: 50%;
+    height: 50%;
+  }
+
+  /* line 557, ../../app/styles/_login.scss */
+  .title {
+    font-size: 29px;
+  }
+
+  /* line 561, ../../app/styles/_login.scss */
+  .username-container {
+    margin-top: 15px;
+  }
+
+  /* line 565, ../../app/styles/_login.scss */
+  input,
+  input:-ms-input-placeholder {
+    font-size: 15px;
+  }
+  input,
+  input::placeholder {
+    font-size: 15px;
+  }
+
+  /* line 570, ../../app/styles/_login.scss */
+  .btn {
+    font-size: 11px;
+    padding: 5px 0;
+    margin-right: 5px;
+    margin-top: 0px;
+  }
+
+  /* line 577, ../../app/styles/_login.scss */
+  .forgot-pw {
+    margin-top: 40px;
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  /* line 584, ../../app/styles/_login.scss */
+  .ui-container {
+    width: 85%;
+    height: 350px;
+  }
+
+  /* line 589, ../../app/styles/_login.scss */
+  .big-image img {
+    width: 75%;
+    height: 50%;
+  }
+
+  /* line 594, ../../app/styles/_login.scss */
+  .title {
+    font-size: 19px;
+  }
+
+  /* line 598, ../../app/styles/_login.scss */
+  input,
+  input:-ms-input-placeholder {
+    font-size: 15px;
+  }
+  input,
+  input::placeholder {
+    font-size: 15px;
+  }
+
+  /* line 603, ../../app/styles/_login.scss */
+  .btn {
+    font-size: 11px;
+    padding: 5px 0;
+    margin-right: 5px;
+    margin-top: 0px;
+  }
+
+  /* line 610, ../../app/styles/_login.scss */
+  .forgot-pw {
+    margin-top: 20px;
+    font-size: 13px;
+  }
+}
+/* line 1, ../../app/styles/_loader.scss */
+.Spinner {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  position: absolute;
+  border: 5px solid #f08011;
+  display: inline-block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+/* line 14, ../../app/styles/_loader.scss */
+.Spinner:after, .Spinner:before {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+/* line 22, ../../app/styles/_loader.scss */
+.Spinner:after {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  border: 5px solid transparent;
+  border-top-color: #fff;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* line 42, ../../app/styles/_loader.scss */
+.disabled-inv {
+  opacity: 0.5;
+  pointer-events: none;
+}
+/* line 46, ../../app/styles/_loader.scss */
+.disabled-inv > * {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* line 1, ../../app/styles/_dashboard.scss */
+.welcome {
+  color: #fff;
+  padding: 25px;
+  font-family: GlacialIndifference-Regular;
+  font-size: 19px;
+  height: 79px;
+}
+
+/* line 10, ../../app/styles/_dashboard.scss */
+.left-menu ul.option-list {
+  list-style: none;
+}
+/* line 12, ../../app/styles/_dashboard.scss */
+.left-menu ul.option-list li.option-list {
+  height: 50px;
+  font-family: 'GlacialIndifference-Regular';
+  font-size: 15px;
+  border-top: 1px solid #282747;
+  border-bottom: 1px solid #282747;
+  text-align: left;
+  padding: 0 12px;
+  line-height: 50px;
+  color: #fff;
+  cursor: pointer;
+}
+/* line 24, ../../app/styles/_dashboard.scss */
+.left-menu ul.option-list li.option-list.active {
+  background: #fff;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  color: #282747;
+}
+
+/* line 1, ../../app/styles/_upload.scss */
+.upload-container {
+  height: 100%;
+}
+
+/* line 4, ../../app/styles/_upload.scss */
+.upload {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding-bottom: 20px;
+  background: transparent;
+  animation: fadeup .5s .5s ease both;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+/* line 19, ../../app/styles/_upload.scss */
+.upload-files {
+  height: 100%;
+}
+
+/* line 22, ../../app/styles/_upload.scss */
+.upload .upload-files header {
+  background: transparent;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  text-align: center;
+}
+
+/* line 28, ../../app/styles/_upload.scss */
+.upload .upload-files header p {
+  color: #fff;
+  font-size: 40px;
+  margin: 0;
+  padding: 50px 0;
+}
+
+/* line 34, ../../app/styles/_upload.scss */
+.upload .upload-files header p i {
+  transform: translateY(20px);
+  opacity: 0;
+  font-size: 30px;
+  animation: fadeup .5s 1s ease both;
+}
+
+/* line 42, ../../app/styles/_upload.scss */
+.upload .upload-files header p .up {
+  font-weight: bold;
+  transform: translateX(-20px);
+  display: inline-block;
+  opacity: 0;
+  animation: faderight .5s 1.5s ease both;
+}
+
+/* line 51, ../../app/styles/_upload.scss */
+.upload .upload-files header p .load {
+  display: inline-block;
+  font-weight: 100;
+  margin-left: -8px;
+  transform: translateX(-20px);
+  opacity: 0;
+  animation: faderight 1s 1.5s ease both;
+}
+
+/* line 61, ../../app/styles/_upload.scss */
+.upload .upload-files .body {
+  text-align: center;
+  padding: 50px 0;
+  padding-bottom: 30px;
+  background: #fff;
+  height: 100%;
+}
+
+/* line 68, ../../app/styles/_upload.scss */
+.upload .upload-files .body.hidden {
+  display: none;
+}
+
+/* line 71, ../../app/styles/_upload.scss */
+.upload .upload-files .body input {
+  visibility: hidden;
+}
+
+/* line 74, ../../app/styles/_upload.scss */
+.upload .upload-files .body i {
+  font-size: 65px;
+  color: lightgray;
+}
+
+/* line 78, ../../app/styles/_upload.scss */
+.upload .upload-files .body p {
+  font-size: 14px;
+  padding-top: 15px;
+  line-height: 1.4;
+}
+
+/* line 83, ../../app/styles/_upload.scss */
+.upload .upload-files .body p b,
+.upload .upload-files .body p a {
+  color: #4db6ac;
+}
+
+/* line 87, ../../app/styles/_upload.scss */
+.upload .upload-files .body.active {
+  border: dashed 2px #4db6ac;
+}
+
+/* line 90, ../../app/styles/_upload.scss */
+.upload .upload-files .body.active i {
+  box-shadow: 0 0 0 -3px #fff, 0 0 0 lightgray, 0 0 0 -3px #fff, 0 0 0 lightgray;
+  animation: file .5s ease both;
+}
+@keyframes file {
+  50% {
+    box-shadow: -8px 8px 0 -3px #fff, -8px 8px 0 lightgray, -8px 8px 0 -3px #fff, -8px 8px 0 lightgray;
+  }
+  75%,
+          100% {
+    box-shadow: -8px 8px 0 -3px #fff, -8px 8px 0 lightgray, -16px 16px 0 -3px #fff, -16px 16px 0 lightgray;
+  }
+}
+/* line 113, ../../app/styles/_upload.scss */
+.upload .upload-files .body.active .pointer-none {
+  pointer-events: none;
+}
+
+/* line 116, ../../app/styles/_upload.scss */
+.upload .upload-files footer {
+  width: 100%;
+  margin: 0 auto;
+  height: 0;
+  height: 100% !important;
+  background: #fff;
+}
+
+/* line 123, ../../app/styles/_upload.scss */
+.upload .upload-files footer .divider {
+  margin: 0 auto;
+  width: 0;
+  border-top: solid 4px #46aba1;
+  text-align: center;
+  overflow: hidden;
+  transition: width .5s ease;
+}
+
+/* line 131, ../../app/styles/_upload.scss */
+.upload .upload-files footer .divider span {
+  display: inline-block;
+  transform: translateY(-25px);
+  font-size: 12px;
+  padding-top: 8px;
+}
+
+/* line 138, ../../app/styles/_upload.scss */
+.upload .upload-files footer.hasFiles {
+  height: auto;
+}
+
+/* line 141, ../../app/styles/_upload.scss */
+.upload .upload-files footer.hasFiles .divider {
+  width: 100%;
+}
+
+/* line 144, ../../app/styles/_upload.scss */
+.upload .upload-files footer.hasFiles .divider span {
+  transform: translateY(0);
+  transition: transform .5s .5s ease;
+  transition: transform .5s .5s ease, -webkit-transform .5s .5s ease;
+}
+
+/* line 151, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files {
+  width: 320px;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding-left: 5px;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 210px;
+}
+
+/* line 161, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files::-webkit-scrollbar-track {
+  background-color: rgba(211, 211, 211, 0.25);
+}
+
+/* line 164, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files::-webkit-scrollbar {
+  width: 4px;
+  background-color: rgba(211, 211, 211, 0.25);
+}
+
+/* line 168, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files::-webkit-scrollbar-thumb {
+  background-color: rgba(77, 182, 172, 0.5);
+}
+
+/* line 171, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files .file {
+  width: 300px;
+  min-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: fade .35s ease both;
+}
+
+/* line 182, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files .file .name {
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 80px;
+  text-align: left;
+}
+
+/* line 190, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files .file .progress {
+  width: 175px;
+  height: 5px;
+  border: solid 1px lightgray;
+  border-radius: 2px;
+  background: linear-gradient(to left, rgba(77, 182, 172, 0.2), rgba(77, 182, 172, 0.8)) no-repeat;
+  background-size: 100% 100%;
+}
+
+/* line 198, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files .file .progress.active {
+  animation: progress 30s linear;
+}
+@keyframes progress {
+  from {
+    background-size: 0 100%;
+  }
+  to {
+    background-size: 100% 100%;
+  }
+}
+/* line 218, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files .file .done {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background: #4db6ac;
+  border-radius: 50%;
+  margin-left: -10px;
+  transform: scale(0);
+  position: relative;
+}
+
+/* line 229, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files .file .done:before {
+  content: "View";
+  position: absolute;
+  top: 0;
+  left: -5px;
+  font-size: 24px;
+  opacity: 0;
+}
+
+/* line 237, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files .file .done:hover:before {
+  transition: all .25s ease;
+  top: -30px;
+  opacity: 1;
+}
+
+/* line 242, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files .file .done.anim {
+  animation: done1 .5s ease forwards;
+}
+
+/* line 246, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files .file .done.anim #path {
+  animation: done2 2.5s .5s ease forwards;
+}
+
+/* line 250, ../../app/styles/_upload.scss */
+.upload .upload-files footer .list-files .file .done #path {
+  stroke-dashoffset: 7387.59423828125;
+  stroke-dasharray: 7387.59423828125 7387.59423828125;
+  stroke: #fff;
+  fill: transparent;
+  stroke-width: 50px;
+}
+@keyframes done2 {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes done1 {
+  50% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.25);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+}
+/* line 301, ../../app/styles/_upload.scss */
+.upload .upload-files footer .importar {
+  outline: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  margin: auto;
+  border: solid 1px #282747;
+  color: #282747;
+  background: transparent;
+  padding: 8px 15px;
+  font-size: 12px;
+  font-family: 'GlacialIndifference-Regular';
+  line-height: 1;
+  cursor: pointer;
+  transform: translateY(15px);
+  opacity: 0;
+  visibility: hidden;
+  margin-left: calc(50% - 40px);
+}
+
+/* line 322, ../../app/styles/_upload.scss */
+.upload .upload-files footer .importar.active {
+  transition: transform .5s 1.5s ease, opacity .5s 1.5s ease, background;
+  transition: transform .5s 1.5s ease, opacity .5s 1.5s ease, background, -webkit-transform .5s 1.5s ease;
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* line 331, ../../app/styles/_upload.scss */
+.upload .upload-files footer .importar:hover {
+  background: #282747;
+  color: #fff;
+}
+@keyframes fadeup {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes faderight {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 400px) {
+  /* line 374, ../../app/styles/_upload.scss */
+  .upload {
+    width: 100%;
+    height: 100%;
+  }
+}

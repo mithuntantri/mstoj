@@ -1,0 +1,205 @@
+<div class="splash">
+	<div class="part1">
+		<img class="logo-ticket" src="assets/img/Maroor Digi Touch.png"/>
+		<!-- <div class="logo">
+			<div class="title">
+				TICKETS
+			</div>
+			<div class="title">
+				<span>OF&nbsp;</span>JOY
+			</div>
+		</div> -->
+	</div>
+	<div class="part2" ng-if="showTokenLoader" style="min-height: 231px;">
+		<div class="loader"></div>
+	</div>
+	<div class="part2" ng-if="!showTokenLoader">
+		<div class="header">Welcome to the world of deals!</div>
+		<div class="desc">Tap on continue to import all your deals and get started</div>
+	</div>
+	<div class="part3" ng-if="!showTokenLoader">
+		<div class="continue-btn" ng-click="openSignIn()">Continue</div>
+	</div>
+	<!-- MODAL CONTENT SAMPLE STARTS HERE -->
+	<div class="modal fade" id="lab-slide-bottom-popup-login" data-keyboard="false" data-backdrop="false">
+		<div class="lab-modal">
+			<div class="lab-modal-head">
+				<div class="modal-title-container">
+					<span class="modal-title">DigiTouch</span>
+				</div>
+				<div class="modal-desc-container">
+					<div class="modal-desc">Sign up to access you Tickets, Offers and Maruti Suzuki Products</div>
+					<img class="logo-ticket-half" src="assets/img/ticket4.png"/>
+				</div>
+			</div>
+		  <div class="lab-modal-body register">
+		  	<div class="signup-email-input-container material-input-wrapper">
+				<label class="signup-email-text">
+				Username (IWS Code)
+				</label>
+				<div class="iws-number-container">
+					<span class="iws-code">WKA0</span>
+					<input class="login-signup-email-input login-email-exist-input" 
+						ng-model="login.username" type="number" ng-disabled="showOTP"
+						id="test-username-input" style="text-transform: uppercase;padding: 8px 70px;"/>
+				</div>
+			</div>
+		  	<div class="signup-email-input-container material-input-wrapper" ng-if="!showOTP">
+				<label class="signup-email-text">
+				Password
+				</label>
+				<div class="mobile-number-container">
+					<input class="login-signup-email-input login-email-exist-input" 
+					ng-model="login.password" ng-disabled="showOTP"
+					id="test-username-input" type="password">
+					<span class="request-otp">Forgot Password?</span>
+				</div>
+			</div>
+		  	<div class="part3 btn-container" style="margin-top: 30px;">
+				<div class="continue-btn" ng-click="loginUser()">
+					<div class="loader inside-btn" ng-if="showBtnLoader"></div>
+					<span ng-if="!showBtnLoader">LOGIN</span>
+				</div>
+			</div>
+			<div class="signup-email-input-container material-input-wrapper create-account">
+				<span class="sign-up-txt">Don't have an  account?&nbsp;</span>
+				<span class="sign-up-btn" ng-click="openSignUp()">Sign Up</span>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<!-- MODAL CONTENT SAMPLE STARTS HERE -->
+	<div class="modal fade" id="lab-slide-bottom-popup-register" data-keyboard="false" data-backdrop="false">
+		<div class="lab-modal">
+			<div class="lab-modal-head">
+				<div class="modal-title-container">
+					<span class="modal-title">DigiTouch</span>
+				</div>
+				<div class="modal-desc-container">
+					<div class="modal-desc">Sign up to access you Tickets, Offers and Maruti Suzuki Products</div>
+					<img class="logo-ticket-half" src="assets/img/ticket4.png"/>
+				</div>
+			</div>
+			<div class="lab-modal-body register">
+			  	<div class="signup-email-input-container material-input-wrapper">
+					<label class="signup-email-text">
+					Username (IWS Code)
+					</label>
+					<div class="iws-number-container">
+						<span class="iws-code">WKA0</span>
+						<input class="login-signup-email-input login-email-exist-input" 
+							ng-model="register.username" type="number" ng-disabled="showOTP"
+							id="test-username-input" style="text-transform: uppercase;padding: 8px 70px;"/>
+					</div>
+				</div>
+				<div class="signup-email-input-container material-input-wrapper">
+					<label class="signup-email-text">
+					Mobile Number
+					</label>
+					<div class="mobile-number-container">
+						<span class="country-code">IN&nbsp;&nbsp;+91</span>
+						<input class="login-signup-email-input login-email-exist-input" 
+							ng-model="register.mobile_number" type="number" ng-disabled="showOTP"
+							id="test-username-input" style="text-transform: uppercase;padding: 8px 70px;"/>
+					</div>
+				</div>
+				<div class="part3 btn-container" style="margin-top: 30px;">
+					<div class="continue-btn" ng-click="registerUser()">
+						<div class="loader inside-btn" ng-if="showBtnLoader"></div>
+						<span ng-if="!showBtnLoader">REGISTER</span>
+					</div>
+				</div>
+				<div class="signup-email-input-container material-input-wrapper create-account">
+					<span class="sign-up-txt">Already have an  account?&nbsp;</span>
+					<span class="sign-up-btn" ng-click="openSignIn()">Sign In</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- MODAL CONTENT SAMPLE STARTS HERE -->
+	<div class="modal fade" id="lab-slide-bottom-popup-otp" data-keyboard="false" data-backdrop="false">
+		<div class="lab-modal">
+			<div class="lab-modal-head">
+				<div class="modal-title-container">
+					<span class="modal-title">DigiTouch</span>
+				</div>
+				<div class="modal-desc-container">
+					<div class="modal-desc">We will send you a one time SMS to the registered mobile number to verify. Carrier rates may apply</div>
+					<img class="logo-ticket-half" src="assets/img/ticket4.png"/>
+				</div>
+			</div>
+		  <div class="lab-modal-body register">
+		  	<div class="signup-email-input-container material-input-wrapper">
+				<label class="signup-email-text" style="text-align: center;">
+				Please wait while we try to automatically verify the One Time Password (OTP) sent to<br/> <span ng-if="register.mobile_number"><b>+91-{{register.mobile_number}}</b></span><span ng-if="!register.mobile_number"><b>registered mobile number</b></span>
+				</label>
+				<div class="loader"></div>
+				<div class="iws-number-container" style="margin: 15px 0;overflow: hidden;">
+					<!-- <input class="login-signup-email-input login-email-exist-input otp-input" 
+						 type="number" maxlength="1"
+						ng-model="otp" style="text-transform: uppercase;padding: 30px 16px;margin: 0 10px 0 10px;font-size: 36px;"/> -->
+					<div otp-input-directive options="otpInput"></div>
+				</div>
+			</div>
+		  	<div class="part3 btn-container" style="margin-top: 30px;">
+				<div class="continue-btn" ng-click="verifyUser()">
+					<div class="loader inside-btn" ng-if="showBtnLoader"></div>
+					<span ng-if="!showBtnLoader">VERIFY</span>
+				</div>
+			</div>
+			<div class="signup-email-input-container material-input-wrapper create-account">
+				<span class="sign-up-txt">Didn't receive OTP?&nbsp;</span>
+				<span class="sign-up-btn" ng-click="resendOTP()">Resend OTP</span>
+			</div>
+		  </div>
+		</div>
+	</div>
+	<!-- MODAL CONTENT SAMPLE STARTS HERE -->
+	<div class="modal fade" id="lab-slide-bottom-popup-setpass" data-keyboard="false" data-backdrop="false">
+		<div class="lab-modal">
+			<div class="lab-modal-head">
+				<div class="modal-title-container">
+					<span class="modal-title">DigiTouch</span>
+				</div>
+				<div class="modal-desc-container">
+					<div class="modal-desc">We will send you a one time SMS to the registered mobile number to verify. Carrier rates may apply</div>
+					<img class="logo-ticket-half" src="assets/img/ticket4.png"/>
+				</div>
+			</div>
+		  <div class="lab-modal-body register">
+		  	<div class="signup-email-input-container material-input-wrapper">
+				<div class="signup-email-input-container material-input-wrapper">
+					<label class="signup-email-text">
+					New Password
+					</label>
+					<div class="iws-number-container">
+						<input class="login-signup-email-input login-email-exist-input" 
+							ng-model="register.password" type="password"
+							id="test-username-input" style="text-transform: uppercase;padding: 20px 5px;font-size: 23px;"/>
+					</div>
+				</div>
+				<div class="signup-email-input-container material-input-wrapper">
+					<label class="signup-email-text">
+					Confirm Password
+					</label>
+					<div class="iws-number-container">
+						<input class="login-signup-email-input login-email-exist-input" 
+							ng-model="register.confirm_password" type="password"
+							id="test-username-input" style="text-transform: uppercase;padding: 20px 5px;font-size: 23px;"/>
+					</div>
+				</div>
+			</div>
+		  	<div class="part3 btn-container" style="margin-top: 30px;">
+				<div class="continue-btn" ng-click="setPassword()">
+					<div class="loader inside-btn" ng-if="showBtnLoader"></div>
+					<span ng-if="!showBtnLoader">SET PASSWORD</span>
+				</div>
+			</div>
+			<div class="signup-email-input-container material-input-wrapper create-account">
+				<span class="sign-up-txt">Do you need any help?&nbsp;</span>
+				<span class="sign-up-btn" ng-click="openFAQ()">FAQs</span>
+			</div>
+		  </div>
+		</div>
+	</div>
+</div>
