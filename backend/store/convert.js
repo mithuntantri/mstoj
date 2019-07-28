@@ -118,7 +118,7 @@ var importProductList = (obj)=>{
 var redoImportDailyData = (lines, count, total_products)=>{
     return new Promise((resolve, reject)=>{
         console.log("count", count + "/" + lines.length)
-        if(count < lines.length){
+        if(count < lines.length-1){
             let headers = lines[0].split(",")
             let columns = lines[count].split(",")
             let queries = []
@@ -146,7 +146,7 @@ var redoImportDailyData = (lines, count, total_products)=>{
                     }
                 }
                 console.log("queries", queries.length, columns.length)
-                if(queries.length == 17){
+                if(queries.length == total_products){
                     sqlQuery.executeQuery(queries).then(()=>{
                         count++
                         redoImportDailyData(lines, count, total_products).then(()=>{
@@ -168,26 +168,32 @@ var redoImportDailyData = (lines, count, total_products)=>{
 
 var importDailyData = (lines)=>{
     return new Promise((resolve, reject)=>{
-        let query = `SELECT * FROM products where product_level='D' OR product_level='A'`
-        sqlQuery.executeQuery([query]).then((result)=>{
-            let total_products = result[0].length
-            console.log("total_products", total_products)
-            products_list = result[0]
-            console.log("products_list", products_list)
-            let required_column_length = 120
-            let columns = lines[0].split(",")
-            console.log("columns", columns.length, "/", required_column_length)
-            if(total_products == 0){
-                reject(`Upload Daily Data before uploading target list`)
-            }else if(columns.length == required_column_length){
-                redoImportDailyData(lines, 1, total_products).then(()=>{
-                    resolve()
-                }).catch((err)=>{
-                    reject(err)
-                })
-            }else{
-                reject(`Invalid File Format for Daily Data`)
-            }
+        let current_date = moment().format("MMM YYYY")
+        let query = `DELETE FROM uploads WHERE upload_date='${current_date}'`
+        sqlQuery.executeQuery([query]).then(()=>{
+            let query = `SELECT * FROM products where product_level='D' OR product_level='A'`
+            sqlQuery.executeQuery([query]).then((result)=>{
+                let total_products = result[0].length
+                console.log("total_products", total_products)
+                products_list = result[0]
+                console.log("products_list", products_list)
+                let required_column_length = (total_products * 2) + 5
+                let columns = lines[0].split(",")
+                console.log("columns", columns.length, "/", required_column_length)
+                if(total_products == 0){
+                    reject(`Upload Daily Data before uploading target list`)
+                }else if(columns.length == required_column_length){
+                    redoImportDailyData(lines, 1, total_products).then(()=>{
+                        resolve()
+                    }).catch((err)=>{
+                        reject(err)
+                    })
+                }else{
+                    reject(`Invalid File Format for Daily Data`)
+                }
+            })
+        }).catch((err)=>{
+            reject(err)
         })
     })
 }
@@ -259,7 +265,7 @@ function removeDuplicates(originalArray, prop) {
 var redoImportTargetList = (lines, count, total_products)=>{
     return new Promise((resolve, reject)=>{
         console.log("count", count + "/" + lines.length)
-        if(count < lines.length){
+        if(count < lines.length-1){
             let headers = lines[0].split(",")
             let columns = lines[count].split(",")
             let queries = []
@@ -329,26 +335,32 @@ function getProductID(product_name){
 
 var importTargetList = (lines)=>{
     return new Promise((resolve, reject)=>{
-        let query = `SELECT * FROM products where product_level='I' OR product_level='A'`
-        sqlQuery.executeQuery([query]).then((result)=>{
-            let total_products = result[0].length
-            console.log("total_products", total_products)
-            products_list = result[0]
-            console.log("products_list", products_list)
-            let required_column_length = 6 + (total_products * 2)
-            let columns = lines[0].split(",")
-            console.log("columns", columns.length)
-            if(total_products == 0){
-                reject(`Upload Product List before uploading target list`)
-            }else if(columns.length == required_column_length){
-                redoImportTargetList(lines, 1, total_products).then(()=>{
-                    resolve()
-                }).catch((err)=>{
-                    reject(err)
-                })
-            }else{
-                reject(`Invalid File Format for Target/Ticket List`)
-            }
+        let current_date = moment().format("MMM YYYY")
+        let query = `DELETE FROM targets WHERE target_date='${current_date}'`
+        sqlQuery.executeQuery([query]).then(()=>{
+            let query = `SELECT * FROM products where product_level='I' OR product_level='A'`
+            sqlQuery.executeQuery([query]).then((result)=>{
+                let total_products = result[0].length
+                console.log("total_products", total_products)
+                products_list = result[0]
+                console.log("products_list", products_list)
+                let required_column_length = 6 + (total_products * 2)
+                let columns = lines[0].split(",")
+                console.log("columns", columns.length)
+                if(total_products == 0){
+                    reject(`Upload Product List before uploading target list`)
+                }else if(columns.length == required_column_length){
+                    redoImportTargetList(lines, 1, total_products).then(()=>{
+                        resolve()
+                    }).catch((err)=>{
+                        reject(err)
+                    })
+                }else{
+                    reject(`Invalid File Format for Target/Ticket List`)
+                }
+            })
+        }).catch((err)=>{
+            reject(err)
         })
     })
 }

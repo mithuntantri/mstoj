@@ -18,6 +18,7 @@ var getDashboardData = (code, count)=>{
 				`SELECT u.*, p.*, t.target_quantity AS total_target FROM uploads u INNER JOIN products p INNER JOIN targets t ON u.product_id=p.id AND t.product_id=p.id AND u.upload_date=t.target_date  AND u.ddt_code=t.ddt_code AND u.iws_code=t.iws_code WHERE u.upload_date='${current_date}' AND u.ddt_code LIKE '${code}%';`,
 				`SELECT iws_code AS request_iws_code, product_id AS request_product_id, target_quantity AS request_target_quantity, status FROM requests WHERE request_date LIKE '%${current_month}' AND ddt_code LIKE '${code}%'`
 			]
+			console.log(query)
 			sqlQuery.executeQuery(query).then((result)=>{
 				console.log(result)
 				if(result[3][0].target && result[4][0].actuals){
@@ -99,9 +100,9 @@ var getLocationWiseData = (code, level, param1, param2, count)=>{
 			if(level == 0){
 				query = `SELECT u.loc_code, COUNT(DISTINCT u.iws_code) AS total_iws, SUM(u.target_quantity) AS actuals, SUM(t.target_quantity) AS target FROM uploads u INNER JOIN targets t ON (u.iws_code = t.iws_code AND t.target_date = u.upload_date AND u.product_id = t.product_id) WHERE u.ddt_code LIKE '${code}%' AND u.upload_date='${current_date}' GROUP BY u.loc_code ORDER BY u.loc_code;`			
 			}else if(level == 1){
-				query = `SELECT u.product_id, p.product_name, COUNT(DISTINCT u.iws_code) AS total_iws, SUM(u.target_quantity) AS actuals, SUM(t.target_quantity) AS target FROM uploads u INNER JOIN targets t INNER JOIN products p ON (u.iws_code = t.iws_code AND u.product_id = t.product_id AND t.target_date=u.upload_date AND p.id=t.product_id) WHERE u.ddt_code LIKE '${code}%' AND u.upload_date='${current_date}' AND u.loc_code='${param1}' GROUP BY u.product_id ORDER BY u.product_id; `
+				query = `SELECT u.product_id, p.product_name, p.product_category, COUNT(DISTINCT u.iws_code) AS total_iws, SUM(u.target_quantity) AS actuals, SUM(t.target_quantity) AS target FROM uploads u INNER JOIN targets t INNER JOIN products p ON (u.iws_code = t.iws_code AND u.product_id = t.product_id AND t.target_date=u.upload_date AND p.id=t.product_id) WHERE u.ddt_code LIKE '${code}%' AND u.upload_date='${current_date}' AND u.loc_code='${param1}' GROUP BY u.product_id ORDER BY u.product_id; `
 			}else if(level == 2){
-				query = `SELECT i.name AS iws_name, u.product_id, p.product_name, u.iws_code, t.loc_code, u.target_quantity AS actuals, t.target_quantity AS target FROM uploads u INNER JOIN targets t INNER JOIN products p INNER JOIN iws i ON (u.iws_code=o.iws_code AND u.iws_code = t.iws_code AND u.product_id = t.product_id AND t.target_date=u.upload_date AND p.id=t.product_id) WHERE u.ddt_code LIKE '${code}%' AND u.upload_date='${current_date}' AND u.loc_code='${param1}' AND u.product_id=${param2}`
+				query = `SELECT i.name AS iws_name, u.product_id, p.product_name, u.iws_code, t.loc_code, u.target_quantity AS actuals, t.target_quantity AS target FROM uploads u INNER JOIN targets t INNER JOIN products p INNER JOIN iws i ON (u.iws_code = t.iws_code AND u.product_id = t.product_id AND t.target_date=u.upload_date AND p.id=t.product_id) WHERE u.ddt_code LIKE '${code}%' AND u.upload_date='${current_date}' AND u.loc_code='${param1}' AND u.product_id=${param2}`
 			}else{
 				reject(`Invalid Drilldown Level`)
 			}

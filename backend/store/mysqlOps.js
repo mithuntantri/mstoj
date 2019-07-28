@@ -160,7 +160,7 @@ var createTargetTable = ()=>{
 						product_id INT NOT NULL,
 						target_quantity INT NOT NULL,
 						ticket_number VARCHAR(32) NOT NULL,
-						UNIQUE(iws_code, target_date, ticket_number)
+						UNIQUE(iws_code, target_date, product_id)
 					);`
 		sqlQuery.executeQuery([query]).then((result)=>{
 			resolve()

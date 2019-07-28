@@ -31,12 +31,15 @@ router.put('/userDetails', passport.authenticate('jwt', {session: true}), (req, 
   let username = req.session.passport.user.username
   console.log("username", username)
   new Promise((resolve, reject)=>{
-    if(req.body.email && req.body.primary_mobile && req.body.secondary_mobile)
-    user.updateUserDetails(username, req.body).then((data)=>{
-      resolve(data)
-    }).catch((err)=>{
-      reject(err)
-    })
+    if(req.body.email && req.body.primary_mobile && req.body.secondary_mobile){
+      user.updateUserDetails(username, req.body).then((data)=>{
+        resolve(data)
+      }).catch((err)=>{
+        reject(err)
+      })
+    }else{
+      reject(`Something went wrong`)
+    }
   }).then((data)=>{
     res.json({'status': true, 'data': data})
   }).catch((err)=>{

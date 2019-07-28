@@ -44,12 +44,12 @@ var AllProducts = ()=>{
 
 var GetAllTargets = (username, current_date)=>{
 	return new Promise((resolve, reject)=>{
-		let query = `SELECT * FROM products p INNER JOIN targets t ON p.id=t.product_id WHERE iws_code='${username}' AND target_date='${current_date}'`
+		let query = `SELECT p.*, t.*, u.target_quantity AS availed_quantity FROM products p INNER JOIN targets t INNER JOIN uploads u ON p.id=t.product_id AND p.id=u.product_id AND t.iws_code=u.iws_code AND t.target_date=u.upload_date WHERE t.iws_code='${username}' AND t.target_date='${current_date}' AND u.upload_date='${current_date}'`
 		console.log(query)
 		sqlQuery.executeQuery([query]).then((result)=>{
-			_.each(result[0], (res)=>{
-				res.availed_quantity = 0
-			})
+			// _.each(result[0], (res)=>{
+			// 	res.availed_quantity = 0
+			// })
 			let res = groupBy(result[0], 'product_name')
 			resolve(res)
 		}).catch((err)=>{
@@ -158,11 +158,12 @@ var updateRequests = (username, request)=>{
 
 var updateUserDetails = (username, user)=>{
 	return new Promise((resolve, reject)=>{
-		let query = `UPDATE iws SET email='${user.email}, primary_mobile='${user.primary_mobile}, secondary_mobile='${user.secondary_mobile}' WHERE username='${username}'`
+		let query = `UPDATE iws SET email='${user.email}', primary_mobile='${user.primary_mobile}', secondary_mobile='${user.secondary_mobile}' WHERE iws_code='${username}'`
+		console.log(query)
 		sqlQuery.executeQuery([query]).then((result)=>{
 			resolve()
 		}).catch((err)=>{
-			reject()
+			reject(err)
 		})
 	})
 }
