@@ -1,9 +1,11 @@
 class Files{
-  constructor($http, $timeout, Toast){
+  constructor($http, $timeout, Toast, Login){
     this.$http = $http
+    this.Login = Login
     this.$timeout = $timeout
     this.Toast = Toast
-    this.validFormats = ['xls', 'xlsx', 'csv'];
+    this.validFormats = ['xls', 'xlsx', 'csv']
+    this.validFormats2 = ['jpg']
     this.file_name = null
     this.FileMessage = null
     this.show_loader = false
@@ -14,16 +16,35 @@ class Files{
         this.enableUpload = false
         this.theFile = element.files[0];
         this.FileMessage = null;
+        console.log("option", option)
+        // if(option == 'Upload Product Image'){
+        //     console.log(this.Login.selected_product)
+        //     let name = this.Login.Products[this.Login.selected_product].product_category
+        //     console.log(name)
+        //     this.theFile.name = name.replace(/ /g, '_')
+        // }
         var filename = this.theFile.name;
         var ext = filename.split(".").pop()
-        var is_valid = this.validFormats.indexOf(ext) !== -1;
-        var is_one = element.files.length == 1
-        var is_valid_filename = this.theFile.name.length <= 64
+        var is_valid, is_one, is_valid_filename
+        if(option == 'Upload Product Image'){
+          is_valid = this.validFormats2.indexOf(ext) !== -1;
+        }else{
+          is_valid = this.validFormats.indexOf(ext) !== -1;
+        }
+        is_one = element.files.length == 1
+        is_valid_filename = this.theFile.name.length <= 64
+        console.log(is_valid, is_one, is_valid_filename)
         if (is_valid && is_one && is_valid_filename){
           this.show_loader = true
           var data = new FormData();
           data.append('file', this.theFile);
           let url = `/api/admin/upload?option=${option}`
+          if(option == 'Upload Product Image'){
+            let id = this.Login.Products[this.Login.selected_product].id
+            let name = this.Login.Products[this.Login.selected_product].product_category
+            url += `&id=${id}&name=${name}`
+          }
+          console.log("url", url)
           this.$http({
             url: url,
             method: 'POST',
@@ -69,5 +90,5 @@ class Files{
     }, 1000);
   }
 }
-Files.$inject = ['$http', '$timeout', 'Toast']
+Files.$inject = ['$http', '$timeout', 'Toast', 'Login']
 angular.module('mstojApp').service('Files', Files)

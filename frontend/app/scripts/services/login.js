@@ -1,6 +1,8 @@
 class Login{
   constructor($http){
     this.$http = $http
+    this.Products = []
+    this.selected_product = null
   }
   adminLogin(data){
     return this.$http({
@@ -13,6 +15,12 @@ class Login{
     return this.$http({
       url: "/api/admin/logout",
       method: "POST"
+    })
+  }
+  getAllProducts(){
+    return this.$http({
+      url: "/api/user/product/names",
+      method: "GET"
     })
   }
 }

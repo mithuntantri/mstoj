@@ -34,7 +34,11 @@ var storage = multer.diskStorage({
     option = option.replace(" ", "_")
     option = option.replace("&", "and")
     let dir = './uploads/'
-    dir += option + "/"
+    if(option == 'Upload_Product_Image'){
+      dir = './images/'
+    }else{
+      dir += option + "/"      
+    }
     if (!fs.existsSync(dir)){
       fs.mkdirSync(dir);
     }
@@ -42,7 +46,11 @@ var storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     let admin_id =  req.user.username;
-    cb(null, admin_id + '_' + moment().format("DDMMMYYYY") + '.' + file.originalname.split('.').pop())
+    if(req.query.option == 'Upload Product Image'){
+      cb(null, req.query.name.replace(/ /g, '-').toLowerCase()+".jpg")
+    }else{
+      cb(null, admin_id + '_' + moment().format("DDMMMYYYY") + '.' + file.originalname.split('.').pop())
+    }
   }
 })
 var upload = multer({ storage: storage, limits: { fileSize: '150MB' } }).single('file')
@@ -70,27 +78,38 @@ router.post("/upload", passport.authenticate('jwt', {session: true}), function(r
   option = option.replace("&", "and")
   option = option.replace(" ", "_")
   option = option.replace(" ", "_")
+  var id, name, is_image = (option=='Upload_Product_Image')?true:false
   var is_distributor = req.user.admin_type == 'DI'
-  new Promise((resolve, reject)=>{
-    upload(req,res,function(err){
-      var file_name = req.file.filename
-      if(err){
-        reject(err)
+  try{
+    new Promise((resolve, reject)=>{
+      upload(req,res,function(err){
+        var file_name = req.file.filename
+        if(err){
+          reject(err)
+        }else{
+          resolve(file_name)
+        }
+      })
+    }).then((file_name)=>{
+      if(!is_image){
+        var folder_name = option;
+        var relative_path = path.resolve("./uploads/" + folder_name) + '/' + file_name
+        convert.convertToCSV(option, relative_path).then(()=>{
+          res.json({'status': true, 'message' : 'File uploaded successfully'})      
+        }).catch((err)=>{
+          res.json({'status': false, 'message' : err})
+        })  
       }else{
-        resolve(file_name)
+        var relative_path = path.resolve("./images/") + '/' + file_name
+        res.json({'status': true, 'message' : 'File uploaded successfully'})      
       }
-    })
-  }).then((file_name)=>{
-    var folder_name = option;
-    var relative_path = path.resolve("./uploads/" + folder_name) + '/' + file_name
-    convert.convertToCSV(option, relative_path).then(()=>{
-      res.json({'status': true, 'message' : 'File uploaded successfully'})      
     }).catch((err)=>{
-      res.json({'status': false, 'message' : err})
+      res.json({'status': false, 'message' : 'File upload failed! Invalid file format'})
     })
-  }).catch((err)=>{
-    res.json({'status': false, 'message' : 'File upload failed! Invalid file format'})
-  })
+  }catch(err){
+    console.log(err)
+    res.json({'status': false, 'message': 'File upload failed! Invalid file format'})
+  }
 })
 
 router.get('/distributor/data', function(req, res, next){

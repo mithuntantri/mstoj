@@ -5,6 +5,7 @@ angular.module('mstojApp')
         [ '$scope','$state', '$rootScope', 'Login', 'Toast', 'Files',
         function ($scope, $state, $rootScope, Login, Toast, Files) {
         	$scope.Files = Files
+        	$scope.Login = Login
         	$scope.name = localStorage.getItem('name')
         	$scope.admin_type = localStorage.getItem('admin_type')
         	Login.loggingOut = false
@@ -18,6 +19,11 @@ angular.module('mstojApp')
         			'name': 'Upload Product List',
         			'selected': false,
         			'restricted': true,
+        		},
+        		{
+        			'name': 'Upload Product Image',
+        			'selected': false,
+        			'restricted': true
         		},
         		{
         			'name': 'Upload Target List',

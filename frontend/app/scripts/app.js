@@ -35,6 +35,20 @@ angular.module('mstojApp', [
               deferred.reject('tokenexpired')
             }
             return deferred.promise
+          }],
+          getAllProducts : ['$q', 'Login', function($q, Login){
+            let deferred = $q.defer()
+            Login.getAllProducts().then((result)=>{
+              if(result.data.status && result.data.data.length > 0){
+                Login.Products = result.data.data
+                Login.selected_product = 0
+              }else{
+                Login.Products = []
+                Login.selected_product = null
+              }
+            })
+            deferred.resolve()
+            return deferred.promise
           }]
         }
       })
