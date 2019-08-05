@@ -26,6 +26,12 @@
 					   	</p>
 				  	</header>
 				  	<div class="body" id="drop">
+				  		<div style="padding: 15px 60px;display: flex;flex-direction: column;justify-content: center;" ng-if="selected_option == 'Upload Product Image'">
+					  		<label>Select Product Category</label>
+					  		<select ng-model="Login.selected_product">
+					  			<option ng-value="$index" ng-repeat="product in Login.Products">{{product.product_category}}</option>
+					  		</select>
+					  	</div>
 					   	<i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
 					   	<p class="pointer-none"><b>Drag and drop</b> files here <br /> or <a href="" id="triggerFile">browse</a> to begin the upload</p>
 						<input type="file" />
