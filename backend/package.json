@@ -45,7 +45,7 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "rand-token": "^0.3.0",
-    "redis": "^2.7.1",
+    "redis": "^3.1.1",
     "request": "^2.81.0",
     "rethinkdb": "^2.3.3",
     "serve-favicon": "^2.5.0",
