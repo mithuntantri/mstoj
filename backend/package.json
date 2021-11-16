@@ -9,7 +9,7 @@
     "amqplib": "^0.5.1",
     "angular-ui-sortable": "^0.16.1",
     "array.prototype.findindex": "^2.0.2",
-    "aws-sdk": "^2.141.0",
+    "aws-sdk": "^2.814.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "client-sessions": "^0.7.0",
